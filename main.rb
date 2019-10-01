@@ -1,4 +1,27 @@
 require 'rspec'
+require 'date'
+
+class Invoice
+  attr_accessor :name
+
+  def initialize(name)
+    @name = name
+  end
+
+  def invoice_date
+    Date.new(1989, 9, 10)
+  end
+end
+
+class InvoiceDecorator < SimpleDelegator
+  def invoice_month
+    invoice_date.month
+  end
+
+  def last_name
+    name.split.last
+  end
+end
 
 describe 'Delegator' do
   it 'can take an invoice as an argument and add functionality on top of the class' do
